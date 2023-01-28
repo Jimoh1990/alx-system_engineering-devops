@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+#This script will display the pid along with the process name, of processes whose name contain the the word bash
+#Not allowed to use ps
+
+pgrep -1 bash
