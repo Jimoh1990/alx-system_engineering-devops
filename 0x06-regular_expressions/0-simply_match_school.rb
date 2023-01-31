@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
-#Matching string
+# A regular expression that is simply matching School
+
 input = ARGV[0]
 
 if input.match(/School/)
