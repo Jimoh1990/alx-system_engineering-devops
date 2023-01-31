@@ -1,13 +1,6 @@
 #!/usr/bin/env ruby
-#To match regular digit phone number
+#To match regular 10 digits phone number
 
-import re
+puts ARGV[0].scan(/^[0-9]{10}$/).join
 
-phone_number = "4155049898"
 
-match = re.search(r"^\d{10}$", phone_number)
-
-if match:
-        print("Valid phone number")
-else:
-      print("Invalid phone number")
