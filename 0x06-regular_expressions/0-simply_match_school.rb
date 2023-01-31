@@ -8,4 +8,3 @@ if input.match(/School/)
 else
   puts ""
 end
-
