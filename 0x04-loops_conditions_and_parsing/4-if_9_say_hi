@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+# Counter variable to keep track of the number of iterations
+count=1
+
+# The while loop to display "Best School" 10 times
+while [ $count -le 10 ]
+do
+  # The if statement to display "Hi" on the 9th iteration
+  if [ $count -eq 9 ]
+  then
+    echo "Best School"
+    echo "Hi"
+  else
+    echo "Best School"
+  fi
+  count=$((count + 1))
+done
