@@ -1,18 +1,15 @@
 #!/usr/bin/env bash
+# Bash scripts that display best school 10 times
+counter=1
 
-# Counter variable to keep track of the number of iterations
-count=1
-
-# The while loop to display "Best School" 10 times
-while [ $count -le 10 ]
+while [ $counter -le 10 ]
 do
-  # The if statement to display "Hi" on the 9th iteration
-  if [ $count -eq 9 ]
-  then
-    echo "Best School"
-    echo "Hi"
-  else
-    echo "Best School"
-  fi
-  count=$((count + 1))
-done
+	  if [ $counter -eq 9 ]
+		    then
+			        echo "Best School"
+				    echo "Hi"
+				      else
+					          echo "Best School"
+						    fi
+						      counter=$((counter + 1))
+					      done
