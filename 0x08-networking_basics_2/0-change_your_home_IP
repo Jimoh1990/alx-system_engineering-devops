@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# backup original /etc/hosts file
+# A bash script that configure an ubuntu server
 sudo cp /etc/hosts /etc/hosts.bak
 
 sudo sed -i 's/127.0.0.1/127.0.0.2/g' /etc/hosts
