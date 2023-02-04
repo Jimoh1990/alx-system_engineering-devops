@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# Get all active network interfaces
+interfaces=$(ifconfig | awk -F: '/^[a-z]/ && !/^lo/ {print $1}')
+
+for interface in $interfaces; do
+  ip=$(ifconfig $interface | awk '/inet / {print $2}')
+  echo $ip
+done
