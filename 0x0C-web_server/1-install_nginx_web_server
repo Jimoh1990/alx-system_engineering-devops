@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+# Installs and configures nginx web server to serve "Hello World!" page
+
+# Update package list
+sudo apt-get update
+
+# Install nginx web server
+sudo apt-get install nginx -y
+
+# Check if nginx is running
+if ! systemctl status nginx >/dev/null; then
+  sudo systemctl start nginx
+fi
+
+# Configure nginx to serve "Hello World!" page
+sudo echo "Hello World!" > /var/www/html/index.html
+
+# Restart nginx
+sudo /etc/init.d/nginx restart
+
