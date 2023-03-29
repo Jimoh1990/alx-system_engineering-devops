@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+#Bash script that starts the Apache web server using the "service" command with superuser privileges (sudo).
+sudo service apache2 start
+
