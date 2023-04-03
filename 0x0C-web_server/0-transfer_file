@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-
 # to transfers  file from client to any server using scp
 
 if [ "$#" -lt 3 ]; then
@@ -9,4 +8,3 @@ elif [ "$#" -lt 4 ]; then
 else
     scp -i "$4" -o StrictHostKeyChecking=no "$1" "$3@$2":~/
 fi
-
