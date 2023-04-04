@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+
+# Configure Nginx so that its HTTP response contains a custom header
+# Add the custom HTTP header "X-Served-By" with the value of the hostname of the server Nginx is running on
+# The script will install and configure Nginx on Ubuntu
+
+# Update package list
+sudo apt-get update
+
+# Install Nginx
+sudo apt-get -y install nginx
+
+# Configure firewall to allow requests through port 80
+sudo ufw allow 'Nginx HTTP'
+
+# Create web root directory
+sudo mkdir -p /var/www/html
+
+# Change permissions to allow easy file creation in the web root directory
+sudo chmod -R 755 /var/www/html
+
+# Create index page
+echo 'Hello World!' | sudo tee /var/www/html/index.html
+
+# Create custom 404 error page
+echo "Ceci n'est pas une page" | sudo tee /var/www/html/404.html
+
+# Add custom header to HTTP response
+custom_header="add_header X-Served-By \$hostname;"
+sudo sed -i "s/# server_tokens off;/# server_tokens off;\n\t$custom_header/" /etc/nginx/nginx.conf
+
+# Modify default Nginx configuration
+default_conf="/etc/nginx/sites-enabled/default"
+redirect_config="server {\n\tlisten 80 default_server;\n\tserver_name _;\n\t$custom_header\n\tlocation = /404.html {\n\t\tinternal;\n\t}\n\terror_page 404 /404.html;\n\tlocation / {\n\t\ttry_files \$uri \$uri/ =404;\n\t}\n\tlocation /redirect_me {\n\t\treturn 301 https://www.blog.ehoneahobed.com;\n\t}\n}"
+sudo cp $default_conf ${default_conf}.bak
+sudo echo -e "$redirect_config" | sudo tee $default_conf
+
+# Restart Nginx
+sudo service nginx restart
+
