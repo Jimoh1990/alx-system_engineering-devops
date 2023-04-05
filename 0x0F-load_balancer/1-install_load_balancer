@@ -27,6 +27,4 @@ echo "$server_config" | sudo tee -a /etc/haproxy/haproxy.cfg
 # Enable HAProxy to be started by init script
 echo "ENABLED=1" | sudo tee -a /etc/default/haproxy
 
-# Restart HAProxy service
 sudo service haproxy restart
-

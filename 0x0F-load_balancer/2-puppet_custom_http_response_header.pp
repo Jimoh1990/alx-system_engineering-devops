@@ -1,11 +1,15 @@
-class { '::nginx':
-  confd_purge => false,
-  confd_dir   => '/etc/nginx/conf.d',
+#This is to use puppet to automate the creation of custom http header
+exec {'update':
+  command => '/usr/bin/apt-get update',
 }
-
-nginx::resource::server { 'default':
-  listen_port => 80,
-  location    => '/',
-  add_header  => ['X-Served-By $hostname'],
+-> package {'nginx':
+  ensure => 'present',
 }
-
+-> file_line { 'http_header':
+  path  => '/etc/nginx/nginx.conf',
+  match => 'http {',
+  line  => "http {\n\tadd_header X-Served-By \"\${hostname}\";",
+}
+-> exec {'run':
+  command => '/usr/sbin/service nginx restart',
+}
