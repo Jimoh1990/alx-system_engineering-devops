@@ -3,7 +3,6 @@
 # Configures HAProxy to send traffic to web-01 and web-02 servers
 # Distributes requests using a round-robin algorithm
 # Makes sure that HAProxy can be managed via an init script
-
 # Update package repositories
 sudo apt-get -y update
 sudo apt-get -y install haproxy
@@ -17,8 +16,8 @@ frontend jimoh- frontend
         default_backend jimoh-backend
 backend jimoh-backend
         balance roundrobin
-        server web01 100.25.19.204:80 check
-        server web02 54.157.159.85:80 check
+        server 157504-web-01 100.25.19.204:80 check
+        server 157504-web-02 54.157.159.85:80 check
 "
 echo "$server_config" | sudo tee -a /etc/haproxy/haproxy.cfg
 
