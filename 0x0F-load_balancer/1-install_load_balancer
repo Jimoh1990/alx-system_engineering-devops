@@ -6,18 +6,16 @@
 
 # Update package repositories
 sudo apt-get -y update
-
-# Install HAProxy
 sudo apt-get -y install haproxy
 
 # Configure HAProxy
 server_config=\
 "
-frontend myfrontend
+frontend jimoh- frontend
         bind *:80
         mode http
-        default_backend mybackend
-backend mybackend
+        default_backend jimoh-backend
+backend jimoh-backend
         balance roundrobin
         server web01 100.25.19.204:80 check
         server web02 54.157.159.85:80 check
