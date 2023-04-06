@@ -1,37 +1,24 @@
-# Install Nginx package
-package { 'nginx':
-  ensure => present,
+# Puppet script to install and configure nginx
+package {'nginx':
+  ensure => 'present',
 }
 
-# Start Nginx service
-service { 'nginx':
-  ensure => running,
-  enable => true,
+exec {'install':
+  command  => 'sudo apt-get update ; sudo apt-get -y install nginx',
+  provider => shell,
+
 }
 
-# Set up Nginx configuration file
-file { '/etc/nginx/sites-available/default':
-  ensure  => file,
-  owner   => 'root',
-  group   => 'root',
-  mode    => '0644',
-  content => "server {
-    listen 80;
-    server_name _;
-    location / {
-      return 301 http://$host/redirect_me;
-    }
-    location /redirect_me {
-      return 301 https://www.google.com/;
-    }
-  }",
-  require => Package['nginx'],
-  notify  => Service['nginx'],
+exec {'Hello':
+  command  => 'echo "Hello World!" | sudo tee /var/www/html/index.html',
+  provider => shell,
 }
 
-# Reload Nginx service
-exec { 'nginx_reload':
-  command     => '/usr/sbin/service nginx reload',
-  refreshonly => true,
+exec {'sudo sed -i "s/listen 80 default_server;/listen 80 default_server;\\n\\tlocation \/redirect_me {\\n\\t\\treturn 301 https:\/\/www.youtube.com\/watch?v=QH2-TGUlwu4;\\n\\t}/" /etc/nginx/sites-available/default':
+  provider => shell,
 }
 
+exec {'run':
+  command  => 'sudo service nginx restart',
+  provider => shell,
+}
