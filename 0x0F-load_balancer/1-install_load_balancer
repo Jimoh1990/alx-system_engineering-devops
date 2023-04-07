@@ -5,7 +5,7 @@
 # Makes sure that HAProxy can be managed via an init script
 # Update package repositories
 sudo apt-get -y update
-sudo apt-get -y install haproxy
+apt-get -y install haproxy
 
 # Configure HAProxy
 server_config=\
