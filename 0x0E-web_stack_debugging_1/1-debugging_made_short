@@ -1,9 +1,6 @@
 #!/usr/bin/env bash
-# debugging nginx port 80
-# Solution: Replace the default Nginx config with a copy of the available config using a symbolic link
-ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
-# Restart the Nginx service to apply the configuration changes
+# Fix Nginx not running on port 80
+sed -i 's/8080/80/g' /etc/nginx/sites-enabled/default
 service nginx restart
-# Forcefully terminate any remaining Nginx processes to ensure a clean start
-pkill -9 nginx
+pkill -o nginx
 
