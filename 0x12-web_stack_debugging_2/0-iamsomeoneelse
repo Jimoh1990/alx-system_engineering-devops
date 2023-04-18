@@ -1,13 +1,6 @@
 #!/usr/bin/env bash
-
 # This script runs the `whoami` command as a specified user.
-
 # Check if the user argument is provided
-if [ $# -ne 1 ]; then
-  echo "Usage: $0 <username>"
-  exit 1
-fi
 
-# Run the `whoami` command as the specified user using sudo
 sudo -u "$1" whoami
 
